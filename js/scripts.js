@@ -16,13 +16,6 @@ var repository = [
   }
 ];
 
-// for (var i = 0; i < repository.length; i++) {
-//   document.write("<br>" + repository[i].name + "<br>");
-//   if (i < repository.length && repository[i].stage === 3) {
-//     document.write('Final Evolutionary Stage');
-//   }
-// }
-
 repository.forEach(function(repository) {
   document.write('Name: ' + repository.name + ' Type: '
   + repository.type + ' Evolutionary Stage: ' + repository.stage + '<br>');
