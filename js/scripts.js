@@ -16,10 +16,10 @@ var repository = [
   }
 ];
 
-repository.forEach(function(repository) {
-  document.write('Name: ' + repository.name + ' Type: '
-  + repository.type + ' Evolutionary Stage: ' + repository.stage + '<br>');
- if (repository.stage === 3) {
+repository.forEach(function(pokeList) {
+  document.write('Name: ' + pokeList.name + ' Type: '
+  + pokeList.type + ' Evolutionary Stage: ' + pokeList.stage + '<br>');
+ if (pokeList.stage === 3) {
   document.write('Final Evolutionary Stage');
 }
 });
