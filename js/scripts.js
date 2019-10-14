@@ -1,5 +1,6 @@
 // Wraps repository within IIFE
 var pokemonRepository = (function () {
+ var $pokemonList = document.querySelector('.pokemonList');
  var repository = [
   {
     name: "Bulbasaur",
