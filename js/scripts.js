@@ -34,6 +34,12 @@ var pokemonRepository = (function () {
  function catchAll() {
    return repository;
  }
+// Function to search repository for Pokemon
+ var pokemonSearch = pokemonRepository.catchAll().filter(function(searchName) {
+   if (searchName.name === searchName) {
+     return searchName;
+   }
+ });
 
  function addListItem(pokemon) {
    var listItem = document.createElement('li');
@@ -66,10 +72,4 @@ var pokemonRepository = (function () {
 // forEach Used To cycle through addListItem function properties
 pokemonRepository.catchAll().forEach(function(pokeList) {
  pokemonRepository.addListItem(pokeList);
-});
-
-// Create a search function that allows access to Pokemon by name
-// Unsure whether searchName needs to be within ""
-var pokemonSearch = pokemonRepository.catchAll().filter(function(pokemon) {
-  return pokemon.name === searchName;
 });
