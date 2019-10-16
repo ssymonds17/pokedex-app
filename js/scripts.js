@@ -1,6 +1,6 @@
 // Wraps repository within IIFE
 var pokemonRepository = (function () {
-  // Creates variable for index 'ul' with pokemonList class
+ // Creates variable for index 'ul' with pokemonList class
  var $pokemonList = document.querySelector('.pokemonList');
  var repository = [
   {
@@ -26,32 +26,33 @@ var pokemonRepository = (function () {
    if (typeof pokemon === 'object' && Object.keys(pokemon).join() ===
  expectedProps.join()) {
    repository.push(pokemon); // If yes, push new Pokemon
- } else {
-   throw new Error('Invalid Pokemon input received') // If no, user sees this message
+ } else { // If no, user sees this message below
+   throw new Error('Invalid Pokemon input received')
  }
 }
-
- function catchAll() { // Function used to return Pokemon object array
+// Function used to return Pokemon object array
+ function catchAll() {
    return repository;
  }
 
  function addListItem(pokemon) {
    var listItem = document.createElement('li');
    var button = document.createElement('button');
-   button.innerText = pokemon.name; // Adds Pokemon name to text within button
-
-   button.classList.add('pokemon-name'); // Adds a CSS class to button using classList.add method
-
-   listItem.appendChild(button); // Adds the button element to the 'li'
-
-   $pokemonList.appendChild(listItem); // Adds the 'li' to 'ul' with pokemonList class in index file
-
-   button.addEventListener('click', function(pokemon) { // Calls showDetails function when button is clicked
+   // Adds Pokemon name to text within button
+   button.innerText = pokemon.name;
+   // Adds a CSS class to button using classList.add method
+   button.classList.add('pokemon-name');
+   // Adds the button element to the 'li'
+   listItem.appendChild(button);
+   // Adds the 'li' to 'ul' with pokemonList class in index file
+   $pokemonList.appendChild(listItem);
+   // Calls showDetails function when button is clicked
+   button.addEventListener('click', function(event) {
      showDetails(pokemon)
    });
  }
-
- function showDetails(pokemon) { // Logs selected Pokemon on console
+ // Logs selected Pokemon on console
+ function showDetails(pokemon) {
    console.log(pokemon);
  }
 
