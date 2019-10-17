@@ -35,11 +35,13 @@ var pokemonRepository = (function () {
    return repository;
  }
 // Function to search repository for Pokemon
- var pokemonSearch = pokemonRepository.catchAll().filter(function(searchName) {
-   if (searchName.name === searchName) {
-     return searchName;
-   }
- });
+ function search(searchName) {
+   repository.filter(function(pokemon) {
+     if (pokemon.name === searchName) {
+       return pokemon;
+     }
+  });
+ }
 
  function addListItem(pokemon) {
    var listItem = document.createElement('li');
@@ -65,7 +67,8 @@ var pokemonRepository = (function () {
  return {
    add: add,
    catchAll: catchAll,
-   addListItem: addListItem
+   addListItem: addListItem,
+   search: search
  };
 })();
 
