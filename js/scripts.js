@@ -2,38 +2,20 @@
 var pokemonRepository = (function () {
  // Creates variable for index 'ul' with pokemonList class
  var $pokemonList = document.querySelector('.pokemonList');
- var repository = [
-  {
-    name: "Bulbasaur",
-    type: ['Grass', ' Poison'],
-    stage: 1
-  },
-  {
-    name: "Ivysaur",
-    type: ['Grass', ' Poison'],
-    stage: 2
-  },
-  {
-    name: "Venusaur",
-    type: ['Grass', ' Poison'],
-    stage: 3
-  }
- ];
+ var repository = [];
+ var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+
 // Adds new Pokemon to var repository
  function add(pokemon) {
-   var expectedProps = ['name', 'type', 'stage'];
-// Checks if the input is an object and keys are as expected
-   if (typeof pokemon === 'object' && Object.keys(pokemon).join() ===
- expectedProps.join()) {
-   repository.push(pokemon); // If yes, push new Pokemon
- } else { // If no, user sees this message below
-   throw new Error('Invalid Pokemon input received')
+   repository.push(pokemon);
  }
-}
+
+
 // Function used to return Pokemon object array
  function catchAll() {
    return repository;
  }
+
 // Function to search repository for Pokemon
  function search(searchName) {
    repository.filter(function(pokemon) {
@@ -59,20 +41,59 @@ var pokemonRepository = (function () {
      showDetails(pokemon)
    });
  }
+
  // Logs selected Pokemon on console
  function showDetails(pokemon) {
-   console.log(pokemon);
+   pokemonRepository.loadDetails(pokemon).then(function () {
+     console.log(pokemon);
+   });
+ }
+
+// Loading data from an external API
+ function loadList() {
+   return fetch(apiUrl).then(function (response) {
+     return response.json();
+   }).then(function (json) {
+     json.results.forEach(function (item) {
+       var pokemon = {
+         name: item.name,
+         detailsUrl: item.url
+       };
+       add(pokemon);
+     });
+   }).catch(function (e) {
+     console.error(e);
+   })
+ }
+
+ function loadDetails(item) {
+   var url = item.detailsUrl;
+   return fetch(url).then(function (response) {
+     return response.json();
+   }).then(function (details) {
+     // Now we add details to the item
+     item.imageUrl = details.sprites.front_default;
+     item.height = details.height;
+     item.types = Object.keys(details.types);
+   }).catch(function (e) {
+     console.error(e);
+   });
  }
 
  return {
    add: add,
    catchAll: catchAll,
    addListItem: addListItem,
-   search: search
+   search: search,
+   loadList: loadList,
+   loadDetails: loadDetails
  };
 })();
 
 // forEach Used To cycle through addListItem function properties
-pokemonRepository.catchAll().forEach(function(pokeList) {
- pokemonRepository.addListItem(pokeList);
+pokemonRepository.loadList().then(function() {
+  // Now the data is loaded
+  pokemonRepository.catchAll().forEach(function(pokeList) {
+    pokemonRepository.addListItem(pokeList);
+  });
 });
