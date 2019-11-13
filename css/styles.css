@@ -190,17 +190,20 @@ like a ball and slide in from right side */
     transform:translateX(1000px);
     height: 120px;
     width: 120px;
+    border-width: thin;
     border-radius: 60px;
   }
   80% {
     transform:translateX(0px);
     height: 120px;
     width: 120px;
+    border-width: thin;
     border-radius: 60px;
   }
   90% {
     height: 220px;
     width: 380px;
+    border-width: medium;
     border-radius: 40px;
   }
   100% {
