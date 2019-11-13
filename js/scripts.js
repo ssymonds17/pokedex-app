@@ -39,7 +39,7 @@ var pokemonRepository = (function () {
    // Adds the 'li' to 'ul' with pokemonList class in index file
    $pokemonList.appendChild(listItem);
    // Calls showDetails function when button is clicked
-   button.addEventListener('click', function(event) {
+   button.addEventListener('click', function() {
      showDetails(pokemon)
    });
  }
@@ -64,6 +64,7 @@ var pokemonRepository = (function () {
        add(pokemon);
      });
    }).catch(function (e) {
+     /* eslint-disable no-console */
      console.error(e);
    })
  }
